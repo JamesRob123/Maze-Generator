@@ -13,6 +13,8 @@ void handle_error(char *message);
 
 /* 11584 on height and width was the largest numbers that worked for me on windows with the photos app */
 int main(int argc, char *argv[]) {
+	clock_t begin = clock();
+	
 	if (argc < 4) {
 		handle_invalid_usage(argv);
 	}
@@ -56,6 +58,10 @@ int main(int argc, char *argv[]) {
 	BITMAPHEADER header = bmp_create_bitmapheader(new_height, new_width);
 	bmp_create_image(header, image_array, filen_name);
 	printf("[done]\n");
+	
+	clock_t end = clock();
+	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+	printf("Time elapsed: %.3fs\n", time_spent);
 	
 	free(image_array);
 	return 0;
