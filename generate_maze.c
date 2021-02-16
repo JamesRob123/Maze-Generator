@@ -28,9 +28,10 @@ int main(int argc, char *argv[]) {
 		handle_error("Error in maze_create()");
 	}
 	printf("Generating maze... ");
+	fflush(stdout);
 	int iResult = maze_generate(maze);
 	if (iResult == -1) {
-		printf("\n");
+		printf("[failed]\n");
 		handle_error("Error in maze_generate()");
 	}
 	printf("[done]\n");
@@ -40,9 +41,10 @@ int main(int argc, char *argv[]) {
 	int new_width = (width * 2 + 1);
 	
 	printf("Converting maze to other format... ");
+	fflush(stdout);
 	uint8_t *image_array = maze_to_image_array(maze);
 	if (image_array == NULL) {
-		printf("\n");
+		printf("[failed]\n");
 		handle_error("Error in maze_to_image_array()");
 	}
 	printf("[done]\n");
@@ -50,6 +52,7 @@ int main(int argc, char *argv[]) {
 
 	/* Create image from image_array */
 	printf("Creating image... ");
+	fflush(stdout);
 	BITMAPHEADER header = bmp_create_bitmapheader(new_height, new_width);
 	bmp_create_image(header, image_array, filen_name);
 	printf("[done]\n");
