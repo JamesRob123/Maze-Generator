@@ -49,11 +49,7 @@ struct s_maze *maze_create(int height, int width) {
 	return maze;
 }
 
-int maze_generate(struct s_maze *maze) {
-	/* Using recursen */
-	// struct s_pos pos = {0, 0};
-	// int iResult = __maze_generate(maze, pos);
-	
+int maze_generate(struct s_maze *maze) {	
 	/* Using iteration */
 	struct array_list *st = array_list_create(sizeof(struct s_pos));
 	struct s_pos current_cell = {0, 0};
@@ -79,19 +75,6 @@ int maze_generate(struct s_maze *maze) {
 	array_list_free(st);
 	return 1;
 }
-
-/*static int __maze_generate(struct s_maze *maze, struct s_pos current_cell) {
-	maze->cells[current_cell.y][current_cell.x].visited = true;
-	while (1) {
-		struct s_pos neighbour = __get_unvisited_neighbour(maze, current_cell);
-		if (neighbour.x == -1 || neighbour.y == -1) {
-			return 1;
-		}
-		__wall_remove(maze, current_cell, neighbour);
-		__maze_generate(maze, neighbour);
-	}
-	return 1;
-}*/
 
 static struct s_pos __get_unvisited_neighbour(struct s_maze *maze, struct s_pos current_cell) {
 	int random_nums[4] = {0, 1, 2, 3};
